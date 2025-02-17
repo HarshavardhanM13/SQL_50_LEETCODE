@@ -1,0 +1,17 @@
+1581. Customer Who Visited but Did Not Make Any Transactions
+
+
+# Write your MySQL query statement below
+
+# USING NOT IN and SUBQUERY
+select customer_id,count(visit_id) as count_no_trans
+ from Visits where visit_id not in ( select visit_id from Transactions)
+  group by customer_id;
+
+#USING LEFT JOINS
+
+
+select customer_id,count(*) as count_no_trans 
+from visits left join transactions on visits.visit_id = transactions.visit_id
+where transactions.visit_id is null 
+group by customer_id;
